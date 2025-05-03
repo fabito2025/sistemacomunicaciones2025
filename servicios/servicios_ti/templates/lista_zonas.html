@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Zonas Registradas</h2>
+    <div class="d-flex justify-content-between mb-3">
+        <a href="{% url 'crear_zona' %}" class="btn btn-success mb-3">Crear Nueva Zona</a>
+        <a href="{% url 'menu' %}" class="btn btn-secondary mb-3">Volver al Menú</a>
+    </div>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th># Zona</th>
+                <th>Administrador</th>
+                <th>Teléfono</th>
+                <th>Orientación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for zona in zonas %}
+            <tr>
+                <td>{{ zona.numero_zona }}</td>
+                <td>{{ zona.nombre_admin_zona }} {{ zona.apellido_admin_zona }}</td>
+                <td>{{ zona.telefono }}</td>
+                <td>{{ zona.get_orientacion_display }}</td>
+                <td>
+                    <a href="{% url 'editar_zona' zona.id %}" class="btn btn-primary btn-sm">Editar</a>
+                    <a href="{% url 'eliminar_zona' zona.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
